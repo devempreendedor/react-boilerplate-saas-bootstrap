@@ -1,0 +1,43 @@
+.submenu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 1.5rem;
+    color: #545a6d !important;
+    position: relative;
+    font-size: 13px;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    cursor: pointer;
+    
+
+    span, svg {
+        color: #A6B0cf;
+    }
+
+    &:hover {
+        span, svg {
+            color: #fff;
+        }
+    }
+}
+
+.submenu-item-row {
+    display: flex;
+    align-items: center;
+}
+
+.submenu-item-icon {
+
+    width: 36px;
+    
+    svg {
+        font-size: 1.3rem;
+    }
+}
+
+.submenu-item-arrow {
+    svg {
+        font-size: 1.1rem;
+    }
+}
