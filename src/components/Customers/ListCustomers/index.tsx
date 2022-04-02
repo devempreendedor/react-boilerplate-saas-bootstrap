@@ -2,9 +2,12 @@ import * as React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md'
 import { Table, MoreButton } from '../../'
+import { useHistory } from 'react-router-dom'
 import './styles.scss'
 
 const ListCustomers = () => {
+  const history = useHistory()
+
   const columns = [
     {
       Header: 'Cliente',
@@ -47,7 +50,12 @@ const ListCustomers = () => {
     <Card>
       <Card.Header>
         <div className="list-customers-header">
-          <Button variant="primary">Add Cliente</Button>
+          <Button
+            onClick={() => history.push('/customers/new')}
+            variant="primary"
+          >
+            Add Cliente
+          </Button>
         </div>
       </Card.Header>
       <Card.Body>

@@ -6,16 +6,11 @@ import SubMenu from './SubMenu'
 const navigation = [
   {
     title: 'Clientes',
-    path: '/customers',
     icon: <FiUsers />,
     children: [
       {
         title: 'Listagem',
         path: '/customers',
-      },
-      {
-        title: 'Adicionar',
-        path: '/customers/new',
       },
     ],
   },
