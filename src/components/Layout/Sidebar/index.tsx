@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './styles.scss'
 import { FiUsers } from 'react-icons/fi'
+import { RiTrophyLine } from 'react-icons/ri'
 import SubMenu from './SubMenu'
 
 const navigation = [
@@ -11,6 +12,16 @@ const navigation = [
       {
         title: 'Listagem',
         path: '/customers',
+      },
+    ],
+  },
+  {
+    title: 'Torneios',
+    icon: <RiTrophyLine />,
+    children: [
+      {
+        title: 'Listagem',
+        path: '/tournaments',
       },
     ],
   },
