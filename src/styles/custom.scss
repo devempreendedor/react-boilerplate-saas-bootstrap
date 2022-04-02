@@ -16,6 +16,20 @@ $theme-colors: (
 
 .card-header {
     background-color: #fff !important;
+    padding: 1rem !important;
+}
+
+.btn {
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    border: 1px solid transparent !important;
+    padding: 0.47rem 0.75rem !important;
+    font-size: .8125rem !important;
+    border-radius: 0.25rem !important;
+}
+
+.btn-primary {
+    color: #ffffff !important;
 }
 
 @import "~bootstrap/scss/bootstrap";

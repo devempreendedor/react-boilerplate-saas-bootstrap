@@ -1,4 +1,5 @@
 export { default as Layout } from './Layout'
 export { default as Container } from './Container'
 export { default as Heading } from './Heading'
+export { default as Table } from './Table'
 export * from './Customers'
