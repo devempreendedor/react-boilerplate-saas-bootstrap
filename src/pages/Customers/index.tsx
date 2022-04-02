@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { Container, Heading, Layout } from '../../components'
+import { Container, Heading, Layout, ListCustomers } from '../../components'
 
 const Customers = () => {
   return (
     <Layout>
       <Container>
         <Heading title="Clientes" />
+        <ListCustomers />
       </Container>
     </Layout>
   )
