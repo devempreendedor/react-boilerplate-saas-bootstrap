@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
@@ -15,12 +15,12 @@ export default function Routes() {
         <PrivateRoute exact path="/customers">
           <Customers />
         </PrivateRoute>
-        <PublicRoute exact path="/customers/new">
+        <PrivateRoute exact path="/customers/new">
           <NewCustomer />
-        </PublicRoute>
-        <PublicRoute exact path="/customers/v/:id">
+        </PrivateRoute>
+        <PrivateRoute exact path="/customers/v/:id">
           <DetailCustomer />
-        </PublicRoute>
+        </PrivateRoute>
       </Switch>
     </Router>
   )

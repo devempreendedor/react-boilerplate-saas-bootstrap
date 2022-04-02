@@ -8,9 +8,16 @@ import {
 import { Table, MoreButton } from '../../'
 import { useHistory } from 'react-router-dom'
 import './styles.scss'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store'
+import Pagination from '../../Pagination'
 
 const ListCustomers = () => {
   const history = useHistory()
+
+  const { data, query, totalCount } = useSelector(
+    (state: RootState) => state.customer
+  )
 
   const columns = [
     {
@@ -53,14 +60,7 @@ const ListCustomers = () => {
     },
   ]
 
-  const data: any[] = [
-    {
-      _id: 1,
-      name: 'Joao Silva',
-      email: 'joao@admin.com',
-      phone: '3782737822',
-    },
-  ]
+  console.log('query', query, totalCount)
 
   return (
     <Card>
@@ -77,6 +77,12 @@ const ListCustomers = () => {
       <Card.Body>
         <Table data={data} columns={columns} />
       </Card.Body>
+      <Pagination
+        currentPage={parseInt(query.page)}
+        pageSize={parseInt(query.limit)}
+        totalCount={totalCount}
+        onPageChange={(v) => console.log('V =>', v)}
+      />
     </Card>
   )
 }

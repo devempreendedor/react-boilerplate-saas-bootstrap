@@ -9,6 +9,7 @@ export default function authHeader() {
   } else {
     return {
       tenant: subdomain,
+      Authorization: '',
     }
   }
 }
