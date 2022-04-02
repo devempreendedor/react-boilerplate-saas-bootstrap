@@ -11,8 +11,6 @@ const CreateCustomer = () => {
       event.stopPropagation()
     }
 
-    console.log('form', event)
-
     setValidated(true)
   }
 

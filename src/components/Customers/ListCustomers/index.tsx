@@ -1,6 +1,10 @@
 import * as React from 'react'
 import { Button, Card } from 'react-bootstrap'
-import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md'
+import {
+  MdOutlineEdit,
+  MdDeleteOutline,
+  MdOutlineRemoveRedEye,
+} from 'react-icons/md'
 import { Table, MoreButton } from '../../'
 import { useHistory } from 'react-router-dom'
 import './styles.scss'
@@ -24,13 +28,24 @@ const ListCustomers = () => {
     {
       Header: 'Ações',
       accessor: 'actions',
-      Cell: () => (
+      Cell: (props) => (
         <MoreButton
           options={[
             {
+              label: 'Visualizar',
+              onClick: () =>
+                history.push(`/customers/v/${props.row.original._id}`),
+              icon: <MdOutlineRemoveRedEye color="#3b82f6" />,
+            },
+            {
               label: 'Editar',
               onClick: () => console.log('Editar'),
-              icon: <MdOutlineEdit />,
+              icon: <MdOutlineEdit color="#22c55e" />,
+            },
+            {
+              label: 'Deletar',
+              onClick: () => console.log('Editar'),
+              icon: <MdDeleteOutline color="#ef4444" />,
             },
           ]}
         />
@@ -40,6 +55,7 @@ const ListCustomers = () => {
 
   const data: any[] = [
     {
+      _id: 1,
       name: 'Joao Silva',
       email: 'joao@admin.com',
       phone: '3782737822',

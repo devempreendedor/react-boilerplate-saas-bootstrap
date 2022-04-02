@@ -1,0 +1,19 @@
+.form-view-row {
+    display: flex;
+    padding: 0.7rem 0;
+    align-items: center;
+    border-bottom: 1px solid rgba(73, 80, 87, 0.1);
+}
+
+.form-view-label {
+    width: 30%;
+    font-weight: bold;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.form-view-value {
+    flex: 1;
+    color: #495057;
+    font-size: 0.9rem
+}
