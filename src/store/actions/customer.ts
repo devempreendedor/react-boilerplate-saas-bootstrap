@@ -1,7 +1,30 @@
-import { LIST_CUSTOMERS_SUCCESS, GET_CUSTOMER_SUCCESS } from '../types'
+import {
+  LIST_CUSTOMERS_SUCCESS,
+  GET_CUSTOMER_SUCCESS,
+  CREATE_CUSTOMER_SUCCESS,
+  UPDATE_QUERY_CUSTOMER,
+} from '../types'
 import { customerService } from '../../services'
 import toast from 'react-hot-toast'
-import { CustomerParams } from '../../types'
+import { CustomerInput, CustomerParams } from '../../types'
+
+export const create = (values: CustomerInput) => async (dispatch: any) => {
+  try {
+    const response = await customerService.create(values)
+    if (response.status === 201) {
+      toast.success('Cliente criado com sucesso!')
+      dispatch({
+        type: CREATE_CUSTOMER_SUCCESS,
+        payload: {
+          customer: response.data,
+        },
+      })
+    }
+    return response
+  } catch (error) {
+    toast.error(error?.message)
+  }
+}
 
 export const list = (params?: CustomerParams) => async (dispatch: any) => {
   try {
@@ -40,4 +63,13 @@ export const find = (id: string) => async (dispatch: any) => {
   } catch (error) {
     toast.error(error?.message)
   }
+}
+
+export const setQuery = (query: CustomerParams) => async (dispatch: any) => {
+  dispatch({
+    type: UPDATE_QUERY_CUSTOMER,
+    payload: {
+      query,
+    },
+  })
 }

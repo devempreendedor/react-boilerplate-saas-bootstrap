@@ -8,12 +8,14 @@ import {
 import { Table, MoreButton } from '../../'
 import { useHistory } from 'react-router-dom'
 import './styles.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store'
 import Pagination from '../../Pagination'
+import { customerAction } from '../../../store/actions'
 
 const ListCustomers = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const { data, query, totalCount } = useSelector(
     (state: RootState) => state.customer
@@ -60,7 +62,14 @@ const ListCustomers = () => {
     },
   ]
 
-  console.log('query', query, totalCount)
+  const handleParams = (v: string) => {
+    dispatch(
+      customerAction.setQuery({
+        ...query,
+        page: v,
+      })
+    )
+  }
 
   return (
     <Card>
@@ -81,7 +90,7 @@ const ListCustomers = () => {
         currentPage={parseInt(query.page)}
         pageSize={parseInt(query.limit)}
         totalCount={totalCount}
-        onPageChange={(v) => console.log('V =>', v)}
+        onPageChange={(v: number) => handleParams(v)}
       />
     </Card>
   )

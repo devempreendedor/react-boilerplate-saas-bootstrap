@@ -1,4 +1,10 @@
-import { LIST_CUSTOMERS_SUCCESS, GET_CUSTOMER_SUCCESS } from '../types'
+import { Customer } from '../../types'
+import {
+  LIST_CUSTOMERS_SUCCESS,
+  GET_CUSTOMER_SUCCESS,
+  CREATE_CUSTOMER_SUCCESS,
+  UPDATE_QUERY_CUSTOMER,
+} from '../types'
 
 const initialState = {
   data: [],
@@ -16,6 +22,14 @@ export default function (state = initialState, action: any) {
   const { type, payload } = action
 
   switch (type) {
+    case CREATE_CUSTOMER_SUCCESS:
+      const customer = payload.customer as Customer
+      const arr = [...state.data]
+      arr.push(customer)
+      return {
+        data: arr,
+        selected: customer,
+      }
     case LIST_CUSTOMERS_SUCCESS:
       return {
         ...state,
@@ -31,6 +45,11 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         selected: payload.customer,
+      }
+    case UPDATE_QUERY_CUSTOMER:
+      return {
+        ...state,
+        query: payload.query,
       }
     default:
       return state
