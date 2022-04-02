@@ -7,6 +7,7 @@ import PublicRoute from './PublicRoute'
 import Customers from '../pages/Customers'
 import NewCustomer from '../pages/NewCustomer'
 import DetailCustomer from '../pages/DetailCustomer'
+import EditCustomer from '../pages/EditCustomer'
 
 export default function Routes() {
   return (
@@ -20,6 +21,9 @@ export default function Routes() {
         </PrivateRoute>
         <PrivateRoute exact path="/customers/v/:id">
           <DetailCustomer />
+        </PrivateRoute>
+        <PrivateRoute exact path="/customers/e/:id">
+          <EditCustomer />
         </PrivateRoute>
       </Switch>
     </Router>

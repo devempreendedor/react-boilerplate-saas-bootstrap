@@ -21,6 +21,8 @@ const ListCustomers = () => {
     (state: RootState) => state.customer
   )
 
+  console.log('#### data =>', data)
+
   const columns = [
     {
       Header: 'Cliente',
@@ -48,7 +50,8 @@ const ListCustomers = () => {
             },
             {
               label: 'Editar',
-              onClick: () => console.log('Editar'),
+              onClick: () =>
+                history.push(`/customers/e/${props.row.original._id}`),
               icon: <MdOutlineEdit color="#22c55e" />,
             },
             {

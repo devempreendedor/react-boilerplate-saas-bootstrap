@@ -4,6 +4,7 @@ import {
   GET_CUSTOMER_SUCCESS,
   CREATE_CUSTOMER_SUCCESS,
   UPDATE_QUERY_CUSTOMER,
+  UPDATE_CUSTOMER_SUCCESS,
 } from '../types'
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     limit: '10',
     page: '1',
     q: '',
+    sort: 'name:asc',
   },
   totalCount: 0,
 }
@@ -27,6 +29,7 @@ export default function (state = initialState, action: any) {
       const arr = [...state.data]
       arr.push(customer)
       return {
+        ...state,
         data: arr,
         selected: customer,
       }
@@ -45,6 +48,15 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         selected: payload.customer,
+      }
+    case UPDATE_CUSTOMER_SUCCESS:
+      const newArr = [...state.data]
+      const idx = newArr.findIndex((row) => row._id === payload.customer._id)
+      newArr[idx] = payload.customer
+      return {
+        ...state,
+        selected: payload.customer,
+        data: newArr,
       }
     case UPDATE_QUERY_CUSTOMER:
       return {

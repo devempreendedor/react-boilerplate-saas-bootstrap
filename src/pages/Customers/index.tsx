@@ -10,7 +10,7 @@ const Customers = () => {
 
   React.useEffect(() => {
     dispatch(customerAction.list(query))
-  }, [query.page])
+  }, [query?.page])
 
   return (
     <Layout>

@@ -3,10 +3,11 @@ import {
   GET_CUSTOMER_SUCCESS,
   CREATE_CUSTOMER_SUCCESS,
   UPDATE_QUERY_CUSTOMER,
+  UPDATE_CUSTOMER_SUCCESS,
 } from '../types'
 import { customerService } from '../../services'
 import toast from 'react-hot-toast'
-import { CustomerInput, CustomerParams } from '../../types'
+import { Customer, CustomerInput, CustomerParams } from '../../types'
 
 export const create = (values: CustomerInput) => async (dispatch: any) => {
   try {
@@ -54,6 +55,24 @@ export const find = (id: string) => async (dispatch: any) => {
     if (response.status === 200) {
       dispatch({
         type: GET_CUSTOMER_SUCCESS,
+        payload: {
+          customer: response.data,
+        },
+      })
+    }
+    return response
+  } catch (error) {
+    toast.error(error?.message)
+  }
+}
+
+export const update = (id: string, body: Customer) => async (dispatch: any) => {
+  try {
+    const response = await customerService.update(id, body)
+    if (response.status === 200) {
+      toast.success('Cliente editado')
+      dispatch({
+        type: UPDATE_CUSTOMER_SUCCESS,
         payload: {
           customer: response.data,
         },

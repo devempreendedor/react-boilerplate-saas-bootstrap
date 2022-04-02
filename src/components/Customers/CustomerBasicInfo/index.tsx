@@ -2,12 +2,14 @@ import * as React from 'react'
 import { Button, Card, Row } from 'react-bootstrap'
 import './styles.scss'
 import { Customer } from '../../../types'
+import { useHistory } from 'react-router-dom'
 
 type Props = {
   customer: Customer
 }
 
 const CustomerBasicInfo = ({ customer }: Props) => {
+  const history = useHistory()
   return (
     <Card>
       <Card.Body>
@@ -28,7 +30,12 @@ const CustomerBasicInfo = ({ customer }: Props) => {
           <div className="form-view-label">Email:</div>
           <div className="form-view-value">{customer.email}</div>
         </div>
-        <Button className="mt-3">Editar Cliente</Button>
+        <Button
+          onClick={() => history.push(`/customers/e/${customer._id}`)}
+          className="mt-3"
+        >
+          Editar Cliente
+        </Button>
       </Card.Body>
     </Card>
   )
