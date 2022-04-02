@@ -1,8 +1,14 @@
 import * as React from 'react'
-import { Layout } from '../../components'
+import { Container, Heading, Layout } from '../../components'
 
 const Customers = () => {
-  return <Layout>Customers</Layout>
+  return (
+    <Layout>
+      <Container>
+        <Heading title="Clientes" />
+      </Container>
+    </Layout>
+  )
 }
 
 export default Customers
