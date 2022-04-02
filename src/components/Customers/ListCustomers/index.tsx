@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Button, Card } from 'react-bootstrap'
-import { Table } from '../../'
+import { MdOutlineEdit, MdDeleteOutline } from 'react-icons/md'
+import { Table, MoreButton } from '../../'
 import './styles.scss'
 
 const ListCustomers = () => {
@@ -16,6 +17,21 @@ const ListCustomers = () => {
     {
       Header: 'Email',
       accessor: 'email',
+    },
+    {
+      Header: 'Ações',
+      accessor: 'actions',
+      Cell: () => (
+        <MoreButton
+          options={[
+            {
+              label: 'Editar',
+              onClick: () => console.log('Editar'),
+              icon: <MdOutlineEdit />,
+            },
+          ]}
+        />
+      ),
     },
   ]
 
