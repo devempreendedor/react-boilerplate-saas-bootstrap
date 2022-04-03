@@ -2,9 +2,14 @@ import * as React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Container, CustomerBasicInfo, Heading, Layout } from '../../components'
-import { RootState } from '../../store'
-import { customerAction } from '../../store/actions'
+import {
+  Container,
+  CustomerBasicInfo,
+  Heading,
+  Layout,
+} from '../../../components'
+import { RootState } from '../../../store'
+import { customerAction } from '../../../store/actions'
 
 const DetailCustomer = () => {
   const dispatch = useDispatch()

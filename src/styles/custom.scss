@@ -32,4 +32,16 @@ $theme-colors: (
     color: #ffffff !important;
 }
 
+.nav-tabs .nav-link {
+    color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+    color: $primary !important;
+}
+
+.nav-link:hover {
+    color: $primary !important;
+}
+
 @import "~bootstrap/scss/bootstrap";

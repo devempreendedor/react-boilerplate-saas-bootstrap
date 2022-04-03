@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Heading, Layout, ListCustomers } from '../../components'
-import { RootState } from '../../store'
-import { customerAction } from '../../store/actions'
+import { Container, Heading, Layout, ListCustomers } from '../../../components'
+import { RootState } from '../../../store'
+import { customerAction } from '../../../store/actions'
 
 const Customers = () => {
   const dispatch = useDispatch()

@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Container, CreateCustomer, Heading, Layout } from '../../components'
-import { RootState } from '../../store'
-import { customerAction } from '../../store/actions'
+import { Container, CreateCustomer, Heading, Layout } from '../../../components'
+import { RootState } from '../../../store'
+import { customerAction } from '../../../store/actions'
 
 const EditCustomer = () => {
   const dispatch = useDispatch()

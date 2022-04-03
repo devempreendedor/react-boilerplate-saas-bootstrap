@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, CreateCustomer, Heading, Layout } from '../../components'
+import { Container, CreateCustomer, Heading, Layout } from '../../../components'
 
 const NewCustomer = () => {
   return (
