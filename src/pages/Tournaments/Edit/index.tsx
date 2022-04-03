@@ -9,11 +9,16 @@ import {
   useRouteMatch,
 } from 'react-router-dom'
 import { Container, Heading, Layout } from '../../../components'
+import { tournamentValueService } from '../../../services'
 import { RootState } from '../../../store'
 import { tournamentAction } from '../../../store/actions'
 
 const TournamentGeneral = React.lazy(
   () => import('../../../components/Tournaments/TournamentGeneral')
+)
+
+const TournamentEntries = React.lazy(
+  () => import('../../../components/Tournaments/TournamentEntries')
 )
 
 const ViewTournament = () => {
@@ -24,14 +29,16 @@ const ViewTournament = () => {
 
   const params = useParams()
 
+  const [entries, setEntries] = React.useState([])
+
   const tabs = [
     {
       title: 'Geral',
       to: `/tournaments/e/${params.id}`,
     },
     {
-      title: 'Rebuy e Addon',
-      to: `/tournaments/e/${params.id}/rebuy`,
+      title: 'BuyIn, Rebuy e Addon',
+      to: `/tournaments/e/${params.id}/entries`,
     },
     {
       title: 'Blinds',
@@ -51,8 +58,19 @@ const ViewTournament = () => {
     (state: RootState) => state.tournament.selected
   )
 
+  const fetchEntries = async () => {
+    const response = await tournamentValueService.list({
+      tournament: params.id,
+    })
+    setEntries(response.data.results)
+  }
+
   React.useEffect(() => {
     dispatch(tournamentAction.find(params.id))
+  }, [])
+
+  React.useEffect(() => {
+    fetchEntries()
   }, [])
 
   return (
@@ -73,8 +91,11 @@ const ViewTournament = () => {
             {tournament && (
               <Switch>
                 <React.Suspense fallback={<div>Loading...</div>}>
-                  <Route path={path}>
+                  <Route exact path={path}>
                     <TournamentGeneral tournament={tournament} />
+                  </Route>
+                  <Route path={`${path}/entries`}>
+                    <TournamentEntries entries={entries} />
                   </Route>
                 </React.Suspense>
               </Switch>
