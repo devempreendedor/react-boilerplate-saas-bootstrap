@@ -1,15 +1,21 @@
 import * as React from 'react'
 import { Button, Card, Col, Form, Row } from 'react-bootstrap'
-import MaskedInput from 'react-maskedinput'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { tournamentAction } from '../../../store/actions'
 
 const TournamentForm = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
   const [validated, setValidated] = React.useState(false)
   const [values, setValues] = React.useState<any>({
     name: '',
-    startDate: '',
+    date: '',
     modality: '',
     rebuy: false,
-    fee: false,
+    addon: false,
+    fee: '',
     buyIn: '',
     startChips: '',
   })
@@ -24,18 +30,29 @@ const TournamentForm = () => {
     const form = event.currentTarget
     if (form.checkValidity() === false) {
       event.stopPropagation()
+      setValidated(true)
+      return
     }
 
-    console.log('#### Submit =>', values)
+    const body = {
+      ...values,
+      buyIn: parseFloat(values.buyIn),
+      fee: parseFloat(values.fee),
+      startChips: parseInt(values.startChips),
+    }
 
-    setValidated(true)
+    const response = await dispatch(tournamentAction.create(body))
+    if (response.status === 201) {
+      toast.success('Torneio criado')
+      history.push(`/tournaments/v/${response.data._id}`)
+    }
   }
 
   return (
     <Card>
       <Card.Body>
         <Card.Title>Criar Novo Torneio</Card.Title>
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Form.Group as={Col}>
               <Form.Label>Nome</Form.Label>
@@ -53,7 +70,7 @@ const TournamentForm = () => {
                 type="date"
                 required
                 placeholder="Nome do torneio"
-                onChange={(e) => handleInput('startDate', e.target.value)}
+                onChange={(e) => handleInput('date', e.target.value)}
               />
             </Form.Group>
             <Form.Group as={Col}>
@@ -75,6 +92,15 @@ const TournamentForm = () => {
                 type="checkbox"
                 label="+ Rebuy"
                 onChange={(e) => handleInput('rebuy', !values.rebuy)}
+              />
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group>
+              <Form.Check
+                type="checkbox"
+                label="+ Addon"
+                onChange={(e) => handleInput('addon', !values.addon)}
               />
             </Form.Group>
           </Row>

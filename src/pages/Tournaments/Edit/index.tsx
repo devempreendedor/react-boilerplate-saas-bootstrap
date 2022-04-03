@@ -9,7 +9,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom'
 import { Container, Heading, Layout } from '../../../components'
-import { tournamentValueService } from '../../../services'
+import { blindService, tournamentValueService } from '../../../services'
 import { RootState } from '../../../store'
 import { tournamentAction } from '../../../store/actions'
 
@@ -21,6 +21,10 @@ const TournamentEntries = React.lazy(
   () => import('../../../components/Tournaments/TournamentEntries')
 )
 
+const TournamentBlinds = React.lazy(
+  () => import('../../../components/Tournaments/TournamentBlinds')
+)
+
 const ViewTournament = () => {
   const dispatch = useDispatch()
   const { path } = useRouteMatch()
@@ -30,6 +34,7 @@ const ViewTournament = () => {
   const params = useParams()
 
   const [entries, setEntries] = React.useState([])
+  const [blinds, setBlinds] = React.useState([])
 
   const tabs = [
     {
@@ -65,12 +70,23 @@ const ViewTournament = () => {
     setEntries(response.data.results)
   }
 
+  const fetchBlinds = async () => {
+    const response = await blindService.list({
+      tournament: params.id,
+    })
+    setBlinds(response?.data.results)
+  }
+
   React.useEffect(() => {
     dispatch(tournamentAction.find(params.id))
   }, [])
 
   React.useEffect(() => {
     fetchEntries()
+  }, [])
+
+  React.useEffect(() => {
+    fetchBlinds()
   }, [])
 
   return (
@@ -96,6 +112,9 @@ const ViewTournament = () => {
                   </Route>
                   <Route path={`${path}/entries`}>
                     <TournamentEntries entries={entries} />
+                  </Route>
+                  <Route path={`${path}/blinds`}>
+                    {blinds.length && <TournamentBlinds blinds={blinds} />}
                   </Route>
                 </React.Suspense>
               </Switch>
