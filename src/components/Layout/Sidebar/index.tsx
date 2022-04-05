@@ -2,9 +2,15 @@ import * as React from 'react'
 import './styles.scss'
 import { FiUsers } from 'react-icons/fi'
 import { RiTrophyLine } from 'react-icons/ri'
+import { GiTable } from 'react-icons/gi'
 import SubMenu from './SubMenu'
 
 const navigation = [
+  {
+    title: 'Mesas',
+    icon: <GiTable />,
+    path: '/tables',
+  },
   {
     title: 'Clientes',
     icon: <FiUsers />,

@@ -1,0 +1,54 @@
+
+.poker-table-wrapper {
+    width: 300px;
+    height: 150px;
+    border-radius: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border-width: 20px;
+    border-style: solid;
+
+    &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+    }
+
+    h4 {
+        font-size: 1rem;
+        max-width: 60%;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+}
+
+.poker-table-open {
+    background-color: #5eead4;
+    border-color: #10b981;
+
+    h4, p {
+    color: #10b981 !important;
+    }
+}
+
+.poker-table-full {
+    background-color: #fda4af;
+    border-color: #f43f5e;
+
+    h4, p {
+        color: #f43f5e !important;
+    }
+}
+
+.poker-table-available {
+    background-color: #fde68a;
+    border-color: #f59e0b;
+
+    h4, p {
+        color: #f59e0b !important;
+    }
+}

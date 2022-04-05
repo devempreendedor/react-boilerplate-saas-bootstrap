@@ -15,6 +15,7 @@ import {
   EditTournament,
   Login,
   ViewTournament,
+  ListTables,
 } from '../pages'
 
 export default function Routes() {
@@ -24,6 +25,10 @@ export default function Routes() {
         <PublicRoute exact path="/login">
           <Login />
         </PublicRoute>
+
+        <PrivateRoute exact path="/tables">
+          <ListTables />
+        </PrivateRoute>
 
         <PrivateRoute exact path="/customers">
           <ListCustomers />
