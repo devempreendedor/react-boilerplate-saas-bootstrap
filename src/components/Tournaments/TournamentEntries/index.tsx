@@ -4,12 +4,15 @@ import { TournamentValue } from '../../../types'
 import CloseButton from 'react-bootstrap/CloseButton'
 import { tournamentValueService } from '../../../services'
 import toast from 'react-hot-toast'
+import { EntriesModal } from '../'
 interface Props {
   entries: TournamentValue[] | []
+  tournamentId: string
 }
 
-const TournamentEntries = ({ entries }: Props) => {
+const TournamentEntries = ({ entries, tournamentId }: Props) => {
   const [values, setValues] = React.useState(entries)
+  const [show, setShow] = React.useState(false)
 
   const types = [
     {
@@ -51,7 +54,7 @@ const TournamentEntries = ({ entries }: Props) => {
     <Form>
       <Row className="mb-4">
         <Form.Group>
-          <Button>Add Entrada</Button>
+          <Button onClick={() => setShow(true)}>Add Entrada</Button>
         </Form.Group>
       </Row>
       {values.map((row, i) => (
@@ -101,6 +104,11 @@ const TournamentEntries = ({ entries }: Props) => {
           </Form.Group>
         </Row>
       ))}
+      <EntriesModal
+        tournamentId={tournamentId}
+        show={show}
+        closeModal={() => setShow(false)}
+      />
     </Form>
   )
 }

@@ -14,6 +14,7 @@ import {
   ViewCustomer,
   EditTournament,
   Login,
+  ViewTournament,
 } from '../pages'
 
 export default function Routes() {
@@ -45,6 +46,9 @@ export default function Routes() {
         </PrivateRoute>
         <PrivateRoute path="/tournaments/e/:id">
           <EditTournament />
+        </PrivateRoute>
+        <PrivateRoute path="/tournaments/v/:id">
+          <ViewTournament />
         </PrivateRoute>
       </Switch>
     </Router>

@@ -25,13 +25,17 @@ const TournamentBlinds = React.lazy(
   () => import('../../../components/Tournaments/TournamentBlinds')
 )
 
+type Params = {
+  id: string
+}
+
 const ViewTournament = () => {
   const dispatch = useDispatch()
   const { path } = useRouteMatch()
 
   const { pathname } = useLocation()
 
-  const params = useParams()
+  const params: Params = useParams()
 
   const [entries, setEntries] = React.useState([])
   const [blinds, setBlinds] = React.useState([])
@@ -92,35 +96,40 @@ const ViewTournament = () => {
   return (
     <Layout>
       <Container>
-        <Heading title="Main Event R$400 + 40" />
-        <Card>
-          <Card.Header>
-            <Nav variant="tabs" defaultActiveKey={pathname}>
-              {tabs.map((row, i) => (
-                <Nav.Item key={i}>
-                  <Nav.Link href={row.to}>{row.title}</Nav.Link>
-                </Nav.Item>
-              ))}
-            </Nav>
-          </Card.Header>
-          <Card.Body>
-            {tournament && (
-              <Switch>
-                <React.Suspense fallback={<div>Loading...</div>}>
-                  <Route exact path={path}>
-                    <TournamentGeneral tournament={tournament} />
-                  </Route>
-                  <Route path={`${path}/entries`}>
-                    <TournamentEntries entries={entries} />
-                  </Route>
-                  <Route path={`${path}/blinds`}>
-                    {blinds.length && <TournamentBlinds blinds={blinds} />}
-                  </Route>
-                </React.Suspense>
-              </Switch>
-            )}
-          </Card.Body>
-        </Card>
+        {tournament && (
+          <>
+            <Heading title={tournament.name} />
+            <Card>
+              <Card.Header>
+                <Nav variant="tabs" defaultActiveKey={pathname}>
+                  {tabs.map((row, i) => (
+                    <Nav.Item key={i}>
+                      <Nav.Link href={row.to}>{row.title}</Nav.Link>
+                    </Nav.Item>
+                  ))}
+                </Nav>
+              </Card.Header>
+              <Card.Body>
+                <Switch>
+                  <React.Suspense fallback={<div>Loading...</div>}>
+                    <Route exact path={path}>
+                      <TournamentGeneral tournament={tournament} />
+                    </Route>
+                    <Route path={`${path}/entries`}>
+                      <TournamentEntries
+                        tournamentId={params.id}
+                        entries={entries}
+                      />
+                    </Route>
+                    <Route path={`${path}/blinds`}>
+                      {blinds.length && <TournamentBlinds blinds={blinds} />}
+                    </Route>
+                  </React.Suspense>
+                </Switch>
+              </Card.Body>
+            </Card>
+          </>
+        )}
       </Container>
     </Layout>
   )

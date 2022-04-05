@@ -1,10 +1,15 @@
 $primary: #22c55e;
+$danger: #ef4444;
+$info: #3b82f6;
+$warning: #eab308;
+
 $card-border-width: 0;
 
 $theme-colors: (
     "primary": $primary,
-    "info": tomato,
-    "danger": teal
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger
 );
 
 .card {
@@ -29,6 +34,18 @@ $theme-colors: (
 }
 
 .btn-primary {
+    color: #ffffff !important;
+}
+
+.btn-danger {
+    color: #ffffff !important;
+}
+
+.btn-info {
+    color: #ffffff !important;
+}
+
+.btn-warning {
     color: #ffffff !important;
 }
 

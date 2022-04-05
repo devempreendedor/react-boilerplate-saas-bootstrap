@@ -13,7 +13,7 @@ export const create = (values: TournamentInput) => async (dispatch: any) => {
   try {
     const response = await tournamentService.create(values)
     if (response.status === 201) {
-      toast.success('TOrneio criado com sucesso!')
+      toast.success('Torneio criado com sucesso!')
       dispatch({
         type: CREATE_TOURNAMENT_SUCCESS,
         payload: {
@@ -71,7 +71,7 @@ export const update =
     try {
       const response = await tournamentService.update(id, body)
       if (response.status === 200) {
-        toast.success('TOrneio editado')
+        toast.success('Torneio editado')
         dispatch({
           type: UPDATE_TOURNAMENT_SUCCESS,
           payload: {
