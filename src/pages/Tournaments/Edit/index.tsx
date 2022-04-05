@@ -25,6 +25,10 @@ const TournamentBlinds = React.lazy(
   () => import('../../../components/Tournaments/TournamentBlinds')
 )
 
+const TournamentTables = React.lazy(
+  () => import('../../../components/Tournaments/TournamentTables')
+)
+
 type Params = {
   id: string
 }
@@ -52,6 +56,10 @@ const ViewTournament = () => {
     {
       title: 'Blinds',
       to: `/tournaments/e/${params.id}/blinds`,
+    },
+    {
+      title: 'Mesas',
+      to: `/tournaments/e/${params.id}/tables`,
     },
     {
       title: 'Jogadores',
@@ -123,6 +131,9 @@ const ViewTournament = () => {
                     </Route>
                     <Route path={`${path}/blinds`}>
                       {blinds.length && <TournamentBlinds blinds={blinds} />}
+                    </Route>
+                    <Route path={`${path}/tables`}>
+                      <TournamentTables />
                     </Route>
                   </React.Suspense>
                 </Switch>
